@@ -1,0 +1,40 @@
+{
+  "name": "kenepa/multi-widget",
+  "description": "A Filament widget that encompasses multiple widgets.",
+  "keywords": [
+    "Kenepa",
+    "laravel",
+    "filament",
+    "multi-widget"
+  ],
+  "homepage": "https://github.com/kenepa/multi-widget",
+  "license": "MIT",
+  "require": {
+    "php": "^8.0",
+    "filament/filament": "^2.0",
+    "spatie/laravel-package-tools": "^1.13.5"
+  },
+  "require-dev": {
+    "tightenco/duster": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kenepa\\MultiWidget\\": "src"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Kenepa\\MultiWidget\\MultiWidgetServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
