@@ -1,7 +1,11 @@
 # Multi Widget
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/kenepa/multi-widget.svg?style=flat-square)](https://packagist.org/packages/kenepa/resource-lock)
-[![Total Downloads](https://img.shields.io/packagist/dt/kenepa/multi-widget.svg?style=flat-square)](https://packagist.org/packages/kenepa/resource-lock)
+<a href="https://github.com/kenepa/resource-lock">
+<img style="width: 100%; max-width: 100%;" alt="filament-shield-art" src="https://raw.githubusercontent.com/kenepa/Kenepa/main/art/MultiWidget/filament-multi-widget-banner.png" >
+</a>
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/kenepa/multi-widget.svg?style=flat-square)](https://packagist.org/packages/kenepa/multi-widget)
+[![Total Downloads](https://img.shields.io/packagist/dt/kenepa/multi-widget.svg?style=flat-square)](https://packagist.org/packages/kenepa/multi-widget)
 
 Filament Multi Widget adds a new type of widget to your Filament application. The Multi Widget allows you to combine multiple widgets into a single widget, that can be switched using tabs. This plugin helps clean up your Filament dashboard.
 
