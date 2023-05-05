@@ -9,6 +9,8 @@
 
 Filament Multi Widget adds a new type of widget to your Filament application. The Multi Widget allows you to combine multiple widgets into a single widget, that can be switched using tabs. This plugin helps clean up your Filament dashboard.
 
+<img style="width: 100%; max-width: 100%;" alt="filament-shield-art" src="https://raw.githubusercontent.com/kenepa/Kenepa/main/art/MultiWidget/filamet-multi-widget-demo.gif" >
+
 ## Installation
 
 You can install the package via composer:
