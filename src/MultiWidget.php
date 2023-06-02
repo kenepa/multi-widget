@@ -4,6 +4,7 @@ namespace Kenepa\MultiWidget;
 
 use Exception;
 use Filament\Widgets\Widget;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 
@@ -12,6 +13,8 @@ class MultiWidget extends Widget
     protected static string $view = 'multi-widget::multi-widget';
 
     public int $currentWidget = 0;
+
+    public ?Model $record = null;
 
     /**
      * Fully qualified class names of the widgets.
@@ -39,7 +42,7 @@ class MultiWidget extends Widget
     public function getWidgetHTMLProperty(): string
     {
         return Blade::render(
-            "@livewire('" . $this->widgets[$this->currentWidget] . "', ['record' => \$record]",
+            "@livewire('" . $this->widgets[$this->currentWidget] . "', ['record' => \$record])",
             ['record' => $this->record]
         );
     }
