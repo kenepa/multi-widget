@@ -38,7 +38,10 @@ class MultiWidget extends Widget
      */
     public function getWidgetHTMLProperty(): string
     {
-        return Blade::render('@livewire(\'' . $this->widgets[$this->currentWidget] . '\')');
+        return Blade::render(
+            "@livewire('" . $this->widgets[$this->currentWidget] . "', ['record' => \$record]",
+            ['record' => $this->record]
+        );
     }
 
     /**
