@@ -2,10 +2,10 @@
 
 namespace Kenepa\MultiWidget;
 
-use Filament\PluginServiceProvider;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class MultiWidgetServiceProvider extends PluginServiceProvider
+class MultiWidgetServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'multi-widget';
 

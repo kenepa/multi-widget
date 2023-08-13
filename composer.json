@@ -11,8 +11,8 @@
   "license": "MIT",
   "require": {
     "php": "^8.0",
-    "filament/filament": "^2.0",
-    "spatie/laravel-package-tools": "^1.13.5"
+    "filament/filament": "^3.0",
+    "spatie/laravel-package-tools": "^1.15.0"
   },
   "require-dev": {
     "tightenco/duster": "^2.0"
