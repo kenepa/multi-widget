@@ -39,7 +39,7 @@ class UserMultiWidget extends MultiWidget
 The `$widgets` property contains the classes of all the widgets that should be added to your Multi Widget. These are normal [Filament widgets](https://filamentphp.com/docs/2.x/admin/resources/widgets) that you created.  
 The Multi Widget above will now render as follows:  
 
-<img src=".github/usermultiwidget-example.png">
+<img src="https://raw.githubusercontent.com/kenepa/multi-widget/2.x/.github/usermultiwidget-example.png">
 
 It is advised to make the `canView` method return false on the widgets, so that they are not rendered twice.
 
