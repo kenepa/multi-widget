@@ -15,6 +15,11 @@ Filament Multi Widget adds a new type of widget to your Filament application. Th
 
 You can install the package via composer:
 
+| Plugin Version | Filament Version | PHP Version |
+|----------------|-----------------|-------------|
+| 1.x            | 2.x   | \> 8.0      |
+| 2.x            | 3.x             | \> 8.1      |
+
 ```bash
 composer require kenepa/multi-widget
 ```
