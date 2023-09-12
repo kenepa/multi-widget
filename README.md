@@ -43,6 +43,27 @@ The Multi Widget above will now render as follows:
 
 It is advised to make the `canView` method return false on the widgets, so that they are not rendered twice.
 
+## Persist tabs in session
+To persist the tabs in the user's session, use the shouldPersistMultiWidgetTabsInSession() method:
+
+```php
+// app/Filament/Widgets/UserMultiWidget.php
+
+class UserMultiWidget extends MultiWidget
+{
+    public array $widgets = [
+        MySubmittedComments::class,
+        MySubmittedFeedback::class,
+        MySubscriptions::class,
+    ];
+    
+    public function shouldPersistMultiWidgetTabsInSession(): bool
+    {
+        return true;
+    }
+}
+```
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
