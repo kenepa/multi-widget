@@ -7,9 +7,12 @@ use Filament\Widgets\Widget;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
+use Kenepa\MultiWidget\Concerns\HasTabs;
 
 class MultiWidget extends Widget
 {
+    use HasTabs;
+
     protected static string $view = 'multi-widget::multi-widget';
 
     public int $currentWidget = 0;
@@ -23,6 +26,12 @@ class MultiWidget extends Widget
 
     public function mount()
     {
+        $tabSessionKey = $this->getMultiWidgetTabSessionKey();
+
+        if (session()->has($tabSessionKey) && $this->shouldPersistMultiWidgetTabsInSession()) {
+            $this->currentWidget = session()->get($tabSessionKey);
+        }
+
         if (count($this->widgets) < 1) {
             throw new Exception('A multi widget must have at least 1 widget.');
         }
@@ -34,6 +43,13 @@ class MultiWidget extends Widget
     public function selectWidget(int $index): void
     {
         $this->currentWidget = $index;
+
+        if ($this->shouldPersistMultiWidgetTabsInSession()) {
+            session()->put(
+                $this->getMultiWidgetTabSessionKey(),
+                $this->currentWidget
+            );
+        }
     }
 
     /**
