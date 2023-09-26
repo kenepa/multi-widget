@@ -35,11 +35,7 @@ class MultiWidget extends Widget
             return;
         }
 
-        $tabSessionKey = $this->getMultiWidgetTabSessionKey();
-
-        if (session()->has($tabSessionKey) && isset($this->visibleWidgets[$tabSessionKey]) && $this->shouldPersistMultiWidgetTabsInSession()) {
-            $this->currentWidget = session()->get($tabSessionKey);
-        }
+        $this->currentWidget = $this->getDefaultWidget();
     }
 
     /**
@@ -99,6 +95,23 @@ class MultiWidget extends Widget
                 ->replace('-', ' ')
                 ->title();
         }
+    }
+
+    protected function getDefaultWidget(): ?string
+    {
+        if (! $this->visibleWidgets) {
+            return null;
+        }
+
+        if ($this->shouldPersistMultiWidgetTabsInSession()) {
+            $tabSessionKey = $this->getMultiWidgetTabSessionKey();
+
+            if (session()->has($tabSessionKey) && isset($this->visibleWidgets[$tabSessionKey])) {
+                return session()->get($tabSessionKey);
+            }
+        }
+
+        return array_key_first($this->visibleWidgets);
     }
 
     /**
