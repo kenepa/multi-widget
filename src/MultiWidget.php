@@ -77,7 +77,7 @@ class MultiWidget extends Widget
      */
     public function getVisibleWidgets(): array
     {
-        return array_values($this->filterVisibleWidgets($this->widgets));
+        return $this->filterVisibleWidgets($this->widgets);
     }
 
     /**
