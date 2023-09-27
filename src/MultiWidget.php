@@ -29,6 +29,7 @@ class MultiWidget extends Widget
 
     public function mount(): void
     {
+
         $this->visibleWidgets = $this->getVisibleWidgets();
 
         if (count($this->visibleWidgets) < 1) {
@@ -105,9 +106,10 @@ class MultiWidget extends Widget
 
         if ($this->shouldPersistMultiWidgetTabsInSession()) {
             $tabSessionKey = $this->getMultiWidgetTabSessionKey();
+            $currentWidgetKey = session()->get($tabSessionKey);
 
-            if (session()->has($tabSessionKey) && isset($this->visibleWidgets[$tabSessionKey])) {
-                return session()->get($tabSessionKey);
+            if (session()->has($tabSessionKey) && isset($this->visibleWidgets[$currentWidgetKey])) {
+                return $currentWidgetKey;
             }
         }
 
