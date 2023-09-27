@@ -4,6 +4,7 @@ namespace Kenepa\MultiWidget;
 
 use Exception;
 use Filament\Widgets\Widget;
+use Filament\Widgets\WidgetConfiguration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -24,17 +25,17 @@ class MultiWidget extends Widget
      */
     public array $widgets = [];
 
-    public function mount()
+    public array $visibleWidgets;
+
+    public function mount(): void
     {
-        $tabSessionKey = $this->getMultiWidgetTabSessionKey();
+        $this->visibleWidgets = $this->getVisibleWidgets();
 
-        if (session()->has($tabSessionKey) && $this->shouldPersistMultiWidgetTabsInSession()) {
-            $this->currentWidget = session()->get($tabSessionKey);
+        if (count($this->visibleWidgets) < 1) {
+            return;
         }
 
-        if (count($this->widgets) < 1) {
-            throw new Exception('A multi widget must have at least 1 widget.');
-        }
+        $this->currentWidget = $this->getDefaultWidget();
     }
 
     /**
@@ -55,12 +56,24 @@ class MultiWidget extends Widget
     /**
      * Returns the HTML of the currently selected widget.
      */
-    public function getWidgetHTMLProperty(): string
+    public function getWidgetHTMLProperty(): ?string
     {
+        if (! isset($this->visibleWidgets[$this->currentWidget])) {
+            return null;
+        }
+
         return Blade::render(
-            "@livewire('" . $this->widgets[$this->currentWidget] . "', ['record' => \$record])",
+            "@livewire('" . $this->visibleWidgets[$this->currentWidget] . "', ['record' => \$record])",
             ['record' => $this->record]
         );
+    }
+
+    /**
+     * @return array<class-string<Widget> | WidgetConfiguration>
+     */
+    public function getVisibleWidgets(): array
+    {
+        return $this->filterVisibleWidgets($this->widgets);
     }
 
     /**
@@ -82,5 +95,44 @@ class MultiWidget extends Widget
                 ->replace('-', ' ')
                 ->title();
         }
+    }
+
+    protected function getDefaultWidget(): ?string
+    {
+        if (! $this->visibleWidgets) {
+            return null;
+        }
+
+        if ($this->shouldPersistMultiWidgetTabsInSession()) {
+            $tabSessionKey = $this->getMultiWidgetTabSessionKey();
+
+            if (session()->has($tabSessionKey) && isset($this->visibleWidgets[$tabSessionKey])) {
+                return session()->get($tabSessionKey);
+            }
+        }
+
+        return array_key_first($this->visibleWidgets);
+    }
+
+    /**
+     * @param  array<class-string<Widget> | WidgetConfiguration>  $widgets
+     * @return array<class-string<Widget> | WidgetConfiguration>
+     */
+    protected function filterVisibleWidgets(array $widgets): array
+    {
+        return array_filter($widgets, fn (string | WidgetConfiguration $widget): bool => $this->normalizeWidgetClass($widget)::canView());
+    }
+
+    /**
+     * @param  class-string<Widget> | WidgetConfiguration  $widget
+     * @return class-string<Widget>
+     */
+    protected function normalizeWidgetClass(string | WidgetConfiguration $widget): string
+    {
+        if ($widget instanceof WidgetConfiguration) {
+            return $widget->widget;
+        }
+
+        return $widget;
     }
 }
