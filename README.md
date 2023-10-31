@@ -46,7 +46,7 @@ The Multi Widget above will now render as follows:
 
 <img src="https://raw.githubusercontent.com/kenepa/multi-widget/2.x/.github/usermultiwidget-example.png">
 
-It is advised to make the `canView` method return false on the widgets, so that they are not rendered twice.
+In case your widget is displayed a second time on the dashboard, make sure the widget is not automatically added to the dashboard again. Check the `discoverWidgets()` function in your `adminPanelProvider.php` file.
 
 ## Persist tabs in session
 To persist the tabs in the user's session, use the shouldPersistMultiWidgetTabsInSession() method:
