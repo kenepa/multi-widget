@@ -14,7 +14,7 @@ class MultiWidget extends Widget
 {
     use HasTabs;
 
-    protected static string $view = 'multi-widget::multi-widget';
+    protected string $view = 'multi-widget::multi-widget';
 
     public int $currentWidget = 0;
 
